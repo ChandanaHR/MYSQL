@@ -1,0 +1,23 @@
+-- SQL Datatypes
+-- 	Numeric datatypes:
+--     Tinyint Very small integer (-128 to 127 / 0 to 255 unsigned) 1byte
+--     Smallint Small integer (-32,768 to 32,767 / 0 to 65,535 unsigned) 2bytes
+
+-- SQL Constraints
+-- 	NOT NULL
+-- 	Ensures a column cannot have NULL values.
+--     UNIQUE
+-- 	Ensures all values in a column are different.
+--     PRIMARY KEY
+-- 	Combination of NOT NULL + UNIQUE.
+-- 	Identifies each row uniquely.
+--     FOREIGN KEY
+-- 	Establishes a relationship between two tables.
+-- 	Ensures referential integrity.
+--     CHECK
+-- 	Ensures values meet a specific condition.
+--     DEFAULT
+-- 	Provides a default value if none is supplied.
+--     AUTO_INCREMENT
+-- 	Automatically generates unique numbers.
+    

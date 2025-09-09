@@ -1,0 +1,16 @@
+-- MySQL follows a client–server architecture, where clients send SQL queries, and the MySQL server 
+-- processes and returns results.
+-- Client Layer
+-- 	Applications connect via:
+-- 	MySQL CLI
+-- 	GUI tools (MySQL Workbench, phpMyAdmin)
+-- 	APIs (JDBC, ODBC, Python connectors)
+-- 	This layer sends SQL queries to the server.
+-- Server Layer (Core MySQL Layer)
+-- This is where query parsing, optimization, and execution happens.
+-- Connection Manager
+-- Manages client connections and authentication.
+-- Query Parser
+-- Breaks down SQL queries into tokens and checks syntax.
+-- Optimizer
+-- Decides the best execution plan (e.g., which index to use, join order).
