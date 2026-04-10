@@ -1,0 +1,116 @@
+Window functions
+A window function performs a calculation across a set of rows related to the current row, without grouping them into a single result.
+Unlike GROUP BY, it does NOT reduce rows — it keeps all rows and adds extra calculated values.
+GROUP BY → combines rows → gives 1 result per group
+Window Function → keeps all rows → adds extra info per row
+Syntax:
+FUNCTION_NAME() OVER (
+    PARTITION BY column
+    ORDER BY column
+)
+
+Example
+| id | name | dept | salary |
+| -- | ---- | ---- | ------ |
+| 1  | A    | IT   | 50000  |
+| 2  | B    | IT   | 60000  |
+| 3  | C    | HR   | 40000  |
+| 4  | D    | HR   | 45000  |
+| 5  | E    | IT   | 70000  |
+ROW_NUMBER() : Assigns a unique number to each row
+  SELECT name, dept, salary,
+       ROW_NUMBER() OVER (ORDER BY salary DESC) AS row_num
+  FROM employees;
+
+RANK(): Ranks rows but skips numbers if tie
+  SELECT name, salary,
+       RANK() OVER (ORDER BY salary DESC) AS rank
+  FROM employees;
+If two people have same salary:
+
+DENSE_RANK(): Similar to rank but no gaps
+SELECT name, salary,
+       DENSE_RANK() OVER (ORDER BY salary DESC) AS rank
+FROM employees;
+
+PARTITION BY (Grouping inside window): Works like GROUP BY, but keeps rows
+SELECT name, dept, salary,
+       ROW_NUMBER() OVER (PARTITION BY dept ORDER BY salary DESC) AS rank
+FROM employees;
+
+SUM() as Window Function: Calculates running total
+SELECT name, salary,
+       SUM(salary) OVER (ORDER BY salary) AS running_total
+FROM employees;
+
+AVG() (Average per department)
+SELECT name, dept, salary,
+       AVG(salary) OVER (PARTITION BY dept) AS avg_salary
+FROM employees;
+
+LAG() (Previous Row Value)
+SELECT name, salary,
+       LAG(salary) OVER (ORDER BY salary) AS prev_salary
+FROM employees;
+
+LEAD() (Next Row Value)
+SELECT name, salary,
+       LEAD(salary) OVER (ORDER BY salary) AS next_salary
+FROM employees;
+
+Date and Time functions
+These functions help you:
+Get current date/time
+Extract parts (year, month, day)
+Add/subtract dates
+Format dates
+SQL stores date like:
+'2026-04-10 14:30:00'
+CURRENT DATE and TIME
+Get current date : SELECT CURRENT_DATE;
+Get current time : SELECT CURRENT_TIME;
+Get current date & time: SELECT NOW();
+
+EXTRACT (Get specific part)
+Extract year: SELECT EXTRACT(YEAR FROM '2026-04-10');
+Extract month: SELECT EXTRACT(MONTH FROM '2026-04-10');
+Extract day: SELECT EXTRACT(DAY FROM '2026-04-10');
+
+Some DB's like mysql use this
+SELECT YEAR('2026-04-10');
+SELECT MONTH('2026-04-10');
+SELECT DAY('2026-04-10');
+
+DATE ADD / SUBTRACT
+Add days : SELECT DATE_ADD('2026-04-10', INTERVAL 5 DAY);
+Subtract days: SELECT DATE_SUB('2026-04-10', INTERVAL 3 DAY);
+DATEDIFF (Difference between dates): SELECT DATEDIFF('2026-04-10', '2026-04-01');
+
+FORMAT DATE
+SELECT DATE_FORMAT('2026-04-10', '%d-%m-%Y');
+
+LAST DAY OF MONTH: SELECT LAST_DAY('2026-04-10');
+DAY NAME / MONTH NAME 
+SELECT DAYNAME('2026-04-10');   -- Friday
+SELECT MONTHNAME('2026-04-10'); -- April
+
+NOW vs SYSDATE
+SELECT NOW();
+SELECT SYSDATE();
+NOW() → same value in one query
+SYSDATE() → real-time changing
+
+NUMERIC FUNCTIONS
+Numeric functions are used to:
+Perform mathematical calculations
+ABS() → Absolute Value : SELECT ABS(-10);
+CEIL() / CEILING() → Round Up : SELECT CEIL(4.2);
+FLOOR() → Round Down : SELECT FLOOR(4.8);
+ROUND() → Round to nearest value : SELECT ROUND(12.345, 2); output: 12.35, Without decimal places: SELECT ROUND(12.6); output: 13
+TRUNCATE() → Cut decimal (no rounding): SELECT TRUNCATE(12.987, 2);
+MOD() → Remainder : SELECT MOD(10, 3);
+POWER() → Exponent: SELECT POWER(2, 3);
+SQRT() → Square Root: SELECT SQRT(16);
+RAND() → Random Number: SELECT RAND();
+SIGN() → Check sign : SELECT SIGN(-15);
+
