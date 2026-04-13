@@ -114,3 +114,39 @@ SQRT() → Square Root: SELECT SQRT(16);
 RAND() → Random Number: SELECT RAND();
 SIGN() → Check sign : SELECT SIGN(-15);
 
+STRING FUNCTIONS
+UPPER() : Converts to uppercase = SELECT UPPER(Name) FROM Student;
+LOWER() : Converts to lowercase = SELECT LOWER(Name) FROM Student;
+LENGTH() : Returns number of bytes (in MySQL) : SELECT LENGTH(Name) FROM Student;
+CHAR_LENGTH() : Returns number of characters = SELECT CHAR_LENGTH(Name) FROM Student;
+CONCAT() : SELECT CONCAT(Name, ' - ', City) FROM Student;
+CONCAT_WS() (with separator) : SELECT CONCAT_WS('-', Name, City) FROM Student;
+SUBSTRING() : Extract part of string = SELECT SUBSTRING(Name, 1, 4) FROM Student;
+LEFT() and RIGHT() : SELECT LEFT(Name, 3), RIGHT(Name, 3) FROM Student;
+INSTR() : Finds position = SELECT INSTR('Ram Kumar', 'Kumar');
+REPLACE() : SELECT REPLACE(Name, 'a', 'X') FROM Student;
+TRIM() : SELECT TRIM('   hello   ');
+LTRIM() / RTRIM() :SELECT LTRIM('   hello');
+                    SELECT RTRIM('hello   ');
+LPAD() : SELECT LPAD(Name, 10, '*') FROM Student;
+RPAD() : SELECT RPAD(Name, 10, '*') FROM Student;
+REVERSE : SELECT REVERSE(Name) FROM Student;
+STRCMP() : SELECT STRCMP('abc', 'ABC'); : 0=equal, 1=greater, -1=smaller
+ASCII() : SELECT ASCII('A');
+CHAR() : SELECT CHAR(65);
+POSITION() : SELECT POSITION('Kumar' IN 'Ram Kumar');
+
+Indexing
+Index is a data structure used to speed up data retrieval . Index = shortcut to find data quickly
+SELECT * FROM Employee WHERE Name = 'Ram'; MySQL checks every row
+CREATE INDEX idx_name ON Employee(Name); Now search becomes fast
+
+Types of indexes
+Primary Index
+Unique Index : No duplicate values allowed: CREATE UNIQUE INDEX idx_email ON Employee(Email);
+Normal Index (Non-Unique): CREATE INDEX idx_name ON Employee(Name);
+Composite Index: Index on multiple columns: CREATE INDEX idx_name_salary ON Employee(Name, Salary);
+Full-Text Index: Used for searching large text: Used for searching large text
+How to View Indexes : SHOW INDEX FROM Employee;
+Delete Index: DROP INDEX idx_name ON Employee;
+
